@@ -1,0 +1,204 @@
+fileFormatVersion: 2
+guid: c83ee71eb147e9e4ebf8bad32d6a6480
+timeCreated: 1460238749
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: bonnet
+    100002: boot_ok
+    100004: brake
+    100006: brake_pivo
+    100008: bump_front
+    100010: bump_rear_
+    100012: chassis
+    100014: door_lf_10
+    100016: door_lf_Ok
+    100018: door_lr_14
+    100020: door_lr_ok
+    100022: door_rf_12
+    100024: door_rf_ok
+    100026: door_rr_ok
+    100028: engine
+    100030: extra1
+    100032: glass_head
+    100034: Headlight
+    100036: interior
+    100038: interior_g
+    100040: light_glas
+    100042: tire
+    100044: tire01
+    100046: tire01_piv
+    100048: tire02
+    100050: tire02_piv
+    100052: tire03
+    100054: tire03_piv
+    100056: tire_pivot
+    100058: winds
+    100060: windscreen
+    100062: //RootNode
+    400000: bonnet
+    400002: boot_ok
+    400004: brake
+    400006: brake_pivo
+    400008: bump_front
+    400010: bump_rear_
+    400012: chassis
+    400014: door_lf_10
+    400016: door_lf_Ok
+    400018: door_lr_14
+    400020: door_lr_ok
+    400022: door_rf_12
+    400024: door_rf_ok
+    400026: door_rr_ok
+    400028: engine
+    400030: extra1
+    400032: glass_head
+    400034: Headlight
+    400036: interior
+    400038: interior_g
+    400040: light_glas
+    400042: tire
+    400044: tire01
+    400046: tire01_piv
+    400048: tire02
+    400050: tire02_piv
+    400052: tire03
+    400054: tire03_piv
+    400056: tire_pivot
+    400058: winds
+    400060: windscreen
+    400062: //RootNode
+    2300000: bonnet
+    2300002: boot_ok
+    2300004: brake_pivo
+    2300006: bump_front
+    2300008: bump_rear_
+    2300010: chassis
+    2300012: door_lf_10
+    2300014: door_lr_14
+    2300016: door_rf_12
+    2300018: door_rr_ok
+    2300020: engine
+    2300022: extra1
+    2300024: glass_head
+    2300026: Headlight
+    2300028: interior
+    2300030: interior_g
+    2300032: light_glas
+    2300034: tire01_piv
+    2300036: tire02_piv
+    2300038: tire03_piv
+    2300040: tire_pivot
+    2300042: winds
+    2300044: windscreen
+    3300000: bonnet
+    3300002: boot_ok
+    3300004: brake_pivo
+    3300006: bump_front
+    3300008: bump_rear_
+    3300010: chassis
+    3300012: door_lf_10
+    3300014: door_lr_14
+    3300016: door_rf_12
+    3300018: door_rr_ok
+    3300020: engine
+    3300022: extra1
+    3300024: glass_head
+    3300026: Headlight
+    3300028: interior
+    3300030: interior_g
+    3300032: light_glas
+    3300034: tire01_piv
+    3300036: tire02_piv
+    3300038: tire03_piv
+    3300040: tire_pivot
+    3300042: winds
+    3300044: windscreen
+    4300000: chassis
+    4300002: interior
+    4300004: interior_g
+    4300006: Headlight
+    4300008: glass_head
+    4300010: light_glas
+    4300012: winds
+    4300014: engine
+    4300016: extra1
+    4300018: door_lf_10
+    4300020: door_rf_12
+    4300022: door_lr_14
+    4300024: door_rr_ok
+    4300026: boot_ok
+    4300028: bonnet
+    4300030: bump_front
+    4300032: bump_rear_
+    4300034: windscreen
+    4300036: brake_pivo
+    4300038: tire_pivot
+    4300040: tire01_piv
+    4300042: tire02_piv
+    4300044: tire03_piv
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
