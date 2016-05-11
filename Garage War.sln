@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garage War.CSharp.Plugins", "Garage War.CSharp.Plugins.csproj", "{FD0A8C50-884F-529C-21B2-BC2C5D0C088B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garage War.CSharp", "Garage War.CSharp.csproj", "{12F3F96F-F84D-ED2C-4871-1667E14BCD90}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garage War.CSharp.Editor", "Garage War.CSharp.Editor.csproj", "{B0287C59-1137-2770-3300-682135E3597D}"
 EndProject
 Global
@@ -15,6 +17,10 @@ Global
 		{FD0A8C50-884F-529C-21B2-BC2C5D0C088B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD0A8C50-884F-529C-21B2-BC2C5D0C088B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD0A8C50-884F-529C-21B2-BC2C5D0C088B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12F3F96F-F84D-ED2C-4871-1667E14BCD90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12F3F96F-F84D-ED2C-4871-1667E14BCD90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12F3F96F-F84D-ED2C-4871-1667E14BCD90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12F3F96F-F84D-ED2C-4871-1667E14BCD90}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B0287C59-1137-2770-3300-682135E3597D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B0287C59-1137-2770-3300-682135E3597D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0287C59-1137-2770-3300-682135E3597D}.Release|Any CPU.ActiveCfg = Release|Any CPU
