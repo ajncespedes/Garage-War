@@ -12,7 +12,7 @@ public class luces : MonoBehaviour
 
     void Start()
     {
-        timeLeft = 120;
+        timeLeft = 10;
         target = GameObject.FindGameObjectsWithTag("interruptor");
         lightGameObjects = GameObject.FindGameObjectsWithTag("luz");
         //private Light myLight;
