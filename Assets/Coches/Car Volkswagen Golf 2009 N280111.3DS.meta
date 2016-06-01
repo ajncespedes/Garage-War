@@ -604,6 +604,123 @@ ModelImporter:
     4300228: Cylinder18
     4300230: Cylinder19
     4300232: Tube01er
+    6400000: Box02
+    6400002: Box03
+    6400004: Box04
+    6400006: Box05
+    6400008: Box06
+    6400010: Box07
+    6400012: Box08
+    6400014: ChamferB10
+    6400016: ChamferB11
+    6400018: ChamferB12
+    6400020: ChamferB13
+    6400022: ChamferB14
+    6400024: ChamferBo0
+    6400026: ChamferBo1
+    6400028: ChamferBo2
+    6400030: ChamferBo3
+    6400032: ChamferBo4
+    6400034: ChamferBo5
+    6400036: ChamferBo6
+    6400038: ChamferBo7
+    6400040: ChamferBo8
+    6400042: ChamferBo9
+    6400044: ChamferBox
+    6400046: ChamferCy0
+    6400048: ChamferCy1
+    6400050: ChamferCy2
+    6400052: ChamferCy3
+    6400054: ChamferCy4
+    6400056: ChamferCyl
+    6400058: Cylinder00
+    6400060: Cylinder01
+    6400062: Cylinder02
+    6400064: Cylinder03
+    6400066: Cylinder04
+    6400068: Cylinder05
+    6400070: Cylinder06
+    6400072: Cylinder07
+    6400074: Cylinder08
+    6400076: Cylinder09
+    6400078: Cylinder10
+    6400080: Cylinder11
+    6400082: Cylinder12
+    6400084: Cylinder13
+    6400086: Cylinder14
+    6400088: Cylinder15
+    6400090: Cylinder16
+    6400092: Cylinder17
+    6400094: Cylinder18
+    6400096: Cylinder19
+    6400098: Line01
+    6400100: Line01wey
+    6400102: Line01wey0
+    6400104: Line01wey1
+    6400106: Object01
+    6400108: Object02
+    6400110: Object03
+    6400112: Object04
+    6400114: Object05
+    6400116: Object06
+    6400118: Object07
+    6400120: Object08
+    6400122: Object09
+    6400124: Object10
+    6400126: Object11
+    6400128: Object12
+    6400130: Object13
+    6400132: Object15
+    6400134: Object16
+    6400136: Object17
+    6400138: Object18
+    6400140: Object19
+    6400142: Object20
+    6400144: Object21
+    6400146: Object22
+    6400148: Object23
+    6400150: Object24
+    6400152: Object25
+    6400154: OilTank01
+    6400156: OilTank02
+    6400158: OilTank03
+    6400160: OilTank04
+    6400162: OilTank05
+    6400164: OilTank06
+    6400166: Plane01
+    6400168: Plane01er0
+    6400170: Plane01er1
+    6400172: Plane01ery
+    6400174: Plane03
+    6400176: Plane04
+    6400178: Plane05
+    6400180: Sphere01
+    6400182: Sphere02
+    6400184: Sphere03
+    6400186: Sphere04
+    6400188: Sphere05
+    6400190: Sphere06
+    6400192: Sphere07
+    6400194: Sphere08
+    6400196: Sphere11
+    6400198: Sphere12
+    6400200: Text01
+    6400202: Text0143y
+    6400204: Text0143y0
+    6400206: Text0143y1
+    6400208: Text02
+    6400210: Torus01
+    6400212: Tube01
+    6400214: Tube01er
+    6400216: Tube01er01
+    6400218: Tube01er02
+    6400220: Tube02
+    6400222: Tube02ery
+    6400224: Tube02ery0
+    6400226: Tube02ery1
+    6400228: Tube03
+    6400230: Tube04
+    6400232: Tube05
   materials:
     importMaterials: 1
     materialName: 0
@@ -630,7 +747,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
