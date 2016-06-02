@@ -18,6 +18,7 @@ public class Jugador : MonoBehaviour {
         t1 = 0;
         muertos = 0;
         vivos = 1;
+        enemigosMuertos.text = "Enemigos muertos: " + muertos.ToString() + "/" + vivos.ToString();
     }
 	
 	void Update () {
@@ -59,7 +60,7 @@ public class Jugador : MonoBehaviour {
                 luminosidad += intensidad / (distancia * distancia);
             }
         }
-        Debug.Log("Luminosidad: " + (100*luminosidad));
+        //Debug.Log("Luminosidad: " + (100*luminosidad));
 
         t1 += Time.deltaTime;
 
