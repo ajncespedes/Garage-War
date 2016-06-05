@@ -18,7 +18,7 @@ public class IAEnemigo : MonoBehaviour {
     bool jugadorDetectado = false;
 
     // Variables para las animaciones del enemigo
-    public String dispararCorriendo, correr, dispararAndando, andar, dispararQuieto, quieto;
+    public String dispararCorriendo, correr, dispararAndando, andar, dispararQuieto, quieto, apuntarAndando;
     
     // Sonido al disparar el arma
     public AudioClip sonidoDisparar;
@@ -30,15 +30,14 @@ public class IAEnemigo : MonoBehaviour {
     System.Random r = new System.Random(DateTime.Now.Millisecond);
 
     // Parámetros de control
-    public float Bullet_Forward_Force;
-    float velocidad = 6;
-    float maxDist = 200;
-    float minDist = 10;
     float luminosidad;
-    public int danoBala = 1000;
-    public int torpeza = 10;
+    public float velocidad = 6;
+    public int danoBala = 100;
+    public int punteria = 500;
+    public int rangoVision = 200;
+    public int rangoAudicion = 30;
 
-    //Tiempos de refresco para controlar las balas por segundo que dispara el arma y búsqueda de jugador
+    // Tiempos de refresco para controlar las balas por segundo que dispara el arma y búsqueda de jugador
     float t1 = 0;
     float t2 = 0;
     float t_diferencia = 1;
@@ -49,20 +48,32 @@ public class IAEnemigo : MonoBehaviour {
 
     void Start () {
         agent = GetComponent<NavMeshAgent>();
-        BuscarJugador();
         t1 = Time.deltaTime;
         player = GameObject.FindGameObjectWithTag("jugador");
         interruptores = GameObject.FindGameObjectsWithTag("interruptor");
         lightGameObjects = GameObject.FindGameObjectsWithTag("tubo");
+
+        // Ajuste de dificultad en función de los enemigos muertos
+        int muertos = player.GetComponent<Jugador>().getMuertos();
+        rangoVision = rangoVision + muertos * 10;
+        rangoAudicion = rangoAudicion + muertos * 5;
+        punteria = punteria + muertos * 20;
+        danoBala = danoBala + muertos * 10;
+        velocidad = velocidad + muertos / 10;
+        Debug.Log("Vision: " + rangoVision + " Audicion: " + rangoAudicion + " Punteria: " + punteria + " Daño Bala: " + danoBala + " Velocidad: " + velocidad);
+
+        agent.stoppingDistance = 10;
+        BuscarJugador();
     }
 	
-    // IA MUY básica
+    // IA básica
 	void Update () {
-        Debug.Log("Detectado: "+jugadorDetectado+" Tiempo de olvido: "+ tiempoDeOlvido);
+        //Debug.Log("Detectado: "+jugadorDetectado+" Tiempo de olvido: "+ tiempoDeOlvido + " Rango de Vision: " + 100 * luminosidad + " Distancia: " + Vector3.Distance(transform.position, player.transform.position));
+        
         if (jugadorDetectado)
         {
             agent.SetDestination(player.transform.position);
-            if (!enemigoVeJugador())
+            if (!Vista())
             {
                 tiempoDeOlvido -= Time.deltaTime;
             }
@@ -80,47 +91,33 @@ public class IAEnemigo : MonoBehaviour {
                 Atacar();
             }
         }
+        else if(Oido())
+        {
+            agent.SetDestination(player.transform.position);
+        }
         else
         {
             BuscarJugador();
         }
         
-        /*luminosidad = player.GetComponent<Jugador>().getLuminosidad();
-        float distancia = Vector3.Distance(transform.position, player.transform.position);
-        if(distancia < maxDist && distancia > minDist && jugadorDetectado)
+        luminosidad = player.GetComponent<Jugador>().getLuminosidad() * 10;
+
+        if(luminosidad > 1)
         {
-            //transform.LookAt(player.transform.position);
-            Bullet_Emitter1.transform.LookAt(player.transform.position);
-            Bullet_Emitter2.transform.LookAt(player.transform.position);
-            //transform.position += transform.forward * velocidad * Time.deltaTime;
-            agent.SetDestination(player.transform.position);
-            
-            if (r.Next(0, 10) > 5)
-            {
-                Atacar();
-            }
-            
+            luminosidad = 1;
         }
-        else
-        {
-
-            EstarQuieto();
-            //dispararLuz();
-        }*/
-        //dispararLuz();
-
-
     }
 
     void disparar()
     {
+        //Debug.Log("i: " + new Vector3(r.Next(-punteria, punteria), r.Next(-punteria / 10, punteria / 10), 0));
         if (t_diferencia > 0.1)
         {
             GetComponent<AudioSource>().PlayOneShot(sonidoDisparar);
             t1 += Time.deltaTime;
 
             RaycastHit hit;
-            Vector3 direccion = Bullet_Emitter2.transform.position - Bullet_Emitter1.transform.position;
+            Vector3 direccion = Bullet_Emitter2.transform.position + new Vector3(1f / r.Next(-punteria, punteria), 1f / r.Next(-punteria, punteria), 1f / r.Next(-punteria, punteria)) - Bullet_Emitter1.transform.position ;
             Vector3 origen = Bullet_Emitter1.transform.position;
             Ray ray = new Ray(origen, direccion);
             if (Physics.Raycast(ray, out hit, 1000))
@@ -152,10 +149,26 @@ public class IAEnemigo : MonoBehaviour {
     
     void Atacar()
     {
-        // IDEAS: Empezar a disparar al menos cuando la direccion del enemigo al jugador sea de un error de 20º
+        transform.LookAt(player.transform.position);
         agent.speed = velocidad;
-        GetComponent<Animation>().Play(dispararAndando);
-        disparar();
+        if(Vector3.Distance(transform.position, player.transform.position) > 50)
+        {
+            agent.speed = velocidad + 5;
+            GetComponent<Animation>().Play(dispararCorriendo);
+            disparar();
+        }
+        if (Vector3.Distance(transform.position, player.transform.position) < 50 && Vector3.Distance(transform.position, player.transform.position) > 15)
+        {
+            agent.speed = velocidad;
+            GetComponent<Animation>().Play(dispararAndando);
+            disparar();
+        }
+        else
+        {
+            agent.speed = 0; // Cubrirse de alguna forma más adelante
+            GetComponent<Animation>().Play(dispararQuieto);
+            disparar();
+        }
         
     }
 
@@ -171,19 +184,15 @@ public class IAEnemigo : MonoBehaviour {
 
     void BuscarJugador()
     {
-        jugadorDetectado = enemigoVeJugador();
+        //Debug.Log("Estoy buscandote");
+        jugadorDetectado = Vista();
         if (tiempoBuscando <= 0)
         {
             tiempoBuscando = 10;
-            Vector3 posicionAleatoria = new Vector3(r.Next(-40, 50), 0, r.Next(-54, 47));
+            Vector3 posicionAleatoria = new Vector3(r.Next(-30, 40), 0, r.Next(-45, 35));
             agent.SetDestination(posicionAleatoria);
             GetComponent<Animation>().Play(andar);
-            agent.speed = 4;
-            float distancia = Vector3.Distance(transform.position, posicionAleatoria);
-            if (distancia < 5)
-            {
-                EstarQuieto();
-            }
+            agent.speed = velocidad/2;
         }
         tiempoBuscando -= Time.deltaTime;
     }
@@ -213,19 +222,14 @@ public class IAEnemigo : MonoBehaviour {
             agent.speed = 0;
             transform.LookAt(lightGameObjects[i].transform.position);
             //Bullet_Emitter1.transform.LookAt(lightGameObjects[i].transform.position);
-            Bullet_Emitter2.transform.position = lightGameObjects[i].transform.position + new Vector3(1f/r.Next(-torpeza, torpeza), 1f / r.Next(-torpeza, torpeza), 1f / r.Next(-torpeza, torpeza));
+            Bullet_Emitter2.transform.position = lightGameObjects[i].transform.position + new Vector3(1f/r.Next(-punteria, punteria), 1f / r.Next(-punteria, punteria), 1f / r.Next(-punteria, punteria));
             //Debug.Log("i: " + new Vector3(1f / r.Next(-10, 10), 1f / r.Next(-10, 10), 1f / r.Next(-10, 10)));
             disparar();
         }
-
-        
-
     }
 
-    void Apuntar()
-    {
-        torpeza = 5;
-    }
+    
+    
 
     void encenderLuz()
     {
@@ -233,32 +237,82 @@ public class IAEnemigo : MonoBehaviour {
         agent.SetDestination(interruptores[0].transform.position);
     }
 
-    public void OnTriggerStay(Collider other)
+    // Sentido del tacto
+    bool Tacto()
     {
-        AudioSource audioSource = other.transform.root.GetComponent<AudioSource>(); // asumiendo que el componente audiosource estara siempre en la raiz del enemigo
-        if (audioSource != null && audioSource.isPlaying)
-        {
-            // implementacion de atenuacion...
-            //soundDirection = (other.transform.position - transform.position);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(soundDirection), Time.deltaTime * turnSpeed);
-        }
+        transform.LookAt(player.transform.position);
+        return true;
     }
 
-    bool enemigoVeJugador()
+   
+
+    // Sentido del oido
+    bool Oido()
+    {
+        if (Vector3.Distance(transform.position, player.transform.position) < rangoAudicion)
+        {
+            AudioSource audioSource = player.gameObject.GetComponent<AudioSource>(); // asumiendo que el componente audiosource estara siempre en la raiz del enemigo
+            if (audioSource != null && audioSource.isPlaying)
+            {
+                //Debug.Log("Te oigo!!");
+                return true;
+            }
+        }
+        //Debug.Log("No te oigo");
+        return false;
+    }
+
+    // Sentido de la vista
+    bool Vista()
     {
         RaycastHit hit;
         Vector3 direccion = Bullet_Emitter2.transform.position - Bullet_Emitter1.transform.position;
-        Vector3 origen = Bullet_Emitter1.transform.position;
-        Ray ray = new Ray(origen, direccion);
-        if (Physics.Raycast(ray, out hit, 1000))
+        Vector3 direccionJugador = player.transform.position - Bullet_Emitter1.transform.position;
+        float angulo = Vector3.Angle(direccion, direccionJugador);
+        //Debug.Log("Angulo: " + angulo + " Detectado: " + jugadorDetectado + " Tiempo de olvido: " + tiempoDeOlvido + " Jugador: " + direccionJugador);
+        //Debug.Log("Rango de visión: " +  90 * luminosidad + " Distancia: " + Vector3.Distance(player.transform.position, transform.position) + " Tiempo: " + punteria);
+        if(Vector3.Distance(transform.position, player.transform.position) > 5)
         {
-            if (hit.collider.tag == "jugador")
+            if (angulo < 70)
             {
-                return true;
+                Ray ray = new Ray(Bullet_Emitter1.transform.position, direccionJugador);
+                if (Physics.Raycast(ray, out hit, rangoVision * luminosidad))
+                {
+                    //Debug.Log("Angulo: " + angulo+ " Tag: "+ hit.collider.tag+ " Detectado: " + jugadorDetectado + " Tiempo de olvido: " + tiempoDeOlvido);
+
+                    if (hit.collider.tag == "jugador")
+                    {
+                        //Debug.Log("Te veo!!");
+                        return true;
+                    }
+                }
             }
-            
         }
+        else
+        {
+            if (angulo < 120)
+            {
+                Ray ray = new Ray(Bullet_Emitter1.transform.position, direccionJugador);
+                if (Physics.Raycast(ray, out hit, rangoVision * luminosidad))
+                {
+                    //Debug.Log("Angulo: " + angulo+ " Tag: "+ hit.collider.tag+ " Detectado: " + jugadorDetectado + " Tiempo de olvido: " + tiempoDeOlvido);
+
+                    if (hit.collider.tag == "jugador")
+                    {
+                        //Debug.Log("Te veo!!");
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        
         return false;
+    }
+
+    void ObservarEntorno()
+    {
+
     }
 }
 

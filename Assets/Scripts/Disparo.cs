@@ -8,10 +8,10 @@ public class Disparo : MonoBehaviour
     public GameObject arma;
 
     // Variables relacionadas con los efectos generados al disparar
-    public Transform hitEffect, hitEffectImpacto, hitEffectFuego, hitEffectSangre, hitEffectElectricidad;
+    public Transform hitEffect, hitEffectImpacto, hitEffectFuego, hitEffectSangre, hitEffectElectricidad, hitEffectTuberia;
 
     // Variables de los sonidos
-    AudioSource audio;
+    new AudioSource audio;
     public AudioClip sonidoDisparar;
     public AudioClip sonidoRecargar1;
     public AudioClip sonidoSinBalas;
@@ -108,12 +108,19 @@ public class Disparo : MonoBehaviour
                         {
                             Instantiate(hitEffectSangre, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
                             hit.transform.SendMessage("AplicarDano", danoBala / hit.distance, SendMessageOptions.DontRequireReceiver);
+                            hit.transform.SendMessage("Tacto", SendMessageOptions.DontRequireReceiver);
                         }
                         // Si la bala llega al tubo de la luz, reproducimos las chispas eléctricas y rompemos el tubo
                         else if (hit.collider.tag == "tubo")
                         {
                             Instantiate(hitEffectElectricidad, hit.point, Quaternion.LookRotation(hit.normal));
-                            hit.transform.SendMessage("RomperLuz", danoBala / hit.distance, SendMessageOptions.DontRequireReceiver);
+                            hit.transform.SendMessage("RomperLuz", SendMessageOptions.DontRequireReceiver);
+                        }
+                        // Si la bala llega a una tubería, reproducimos el agua a presión
+                        else if (hit.collider.tag == "tuberia")
+                        {
+                            Instantiate(hitEffectImpacto, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+                            Instantiate(hitEffectTuberia, hit.point, Quaternion.LookRotation(hit.normal));
                         }
 
                     }

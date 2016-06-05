@@ -64,6 +64,11 @@ public class Jugador : MonoBehaviour {
 
         t1 += Time.deltaTime;
 
+        if(vida < 0)
+        {
+            Application.Quit();
+        }
+
     }
 
     // Método que recibe daño de una bala enemiga
@@ -76,6 +81,12 @@ public class Jugador : MonoBehaviour {
     public float getLuminosidad()
     {
         return luminosidad;
+    }
+
+    // Método público para informar al enemigo de la luminosidad del jugador
+    public int getMuertos()
+    {
+        return muertos;
     }
 
     // Método para informar de la muerte de un enemigo

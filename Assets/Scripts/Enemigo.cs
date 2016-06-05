@@ -4,9 +4,9 @@ using System.Collections;
 public class Enemigo : MonoBehaviour {
 
     public Light myLight;                       // Luz del tubo
-    AudioSource audio;                          // Sonido al romperse el cristal
+    new AudioSource audio;                      // Sonido al romperse el cristal
     public GameObject balasNuevas;              // Caja de balas que suelta el enemigo al morir
-    public int vida;                            // Puntos de vida del enemigo
+    public int vida = 100;                      // Puntos de vida del enemigo
     
     void Start () {
 	
@@ -14,6 +14,7 @@ public class Enemigo : MonoBehaviour {
 	
 	void Update () {
         // Si el enemigo muere, desaparece y deja caer una caja de balas
+        //Debug.Log("Vida: " + vida);
         if (vida < 0)
         {
             Instantiate(balasNuevas, transform.position+ new Vector3(0,2,0), transform.rotation);

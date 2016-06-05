@@ -3,7 +3,7 @@
 public class SpawnEnemy : MonoBehaviour
 {
     public GameObject enemy;                // El prefab del enemigo
-    public float spawnTime = 3f;            // Tiempo entre cada spawn
+    public float spawnTime = 30f;            // Tiempo entre cada spawn
 
 
     void Start()
@@ -18,5 +18,6 @@ public class SpawnEnemy : MonoBehaviour
         // Creamos un enemigo en esa posición
         GameObject.FindGameObjectWithTag("jugador").SendMessage("EnemigoVivo", SendMessageOptions.DontRequireReceiver);
         Instantiate(enemy, transform.position, transform.rotation);
+        spawnTime--;
     }
 }
