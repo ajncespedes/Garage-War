@@ -55,11 +55,11 @@ public class IAEnemigo : MonoBehaviour {
 
         // Ajuste de dificultad en función de los enemigos muertos
         int muertos = player.GetComponent<Jugador>().getMuertos();
-        rangoVision = rangoVision + muertos * 10;
-        rangoAudicion = rangoAudicion + muertos * 5;
-        punteria = punteria + muertos * 20;
-        danoBala = danoBala + muertos * 10;
-        velocidad = velocidad + muertos / 10;
+        rangoVision = rangoVision + muertos * 20;
+        rangoAudicion = rangoAudicion + muertos * 10;
+        punteria = punteria + muertos * 30;
+        danoBala = danoBala + muertos * 20;
+        velocidad = velocidad + muertos / 5;
         Debug.Log("Vision: " + rangoVision + " Audicion: " + rangoAudicion + " Punteria: " + punteria + " Daño Bala: " + danoBala + " Velocidad: " + velocidad);
 
         agent.stoppingDistance = 10;
@@ -69,7 +69,14 @@ public class IAEnemigo : MonoBehaviour {
     // IA básica
 	void Update () {
         //Debug.Log("Detectado: "+jugadorDetectado+" Tiempo de olvido: "+ tiempoDeOlvido + " Rango de Vision: " + 100 * luminosidad + " Distancia: " + Vector3.Distance(transform.position, player.transform.position));
-        
+
+        luminosidad = player.GetComponent<Jugador>().getLuminosidad() * 10;
+
+        if (luminosidad > 1)
+        {
+            luminosidad = 1;
+        }
+
         if (jugadorDetectado)
         {
             agent.SetDestination(player.transform.position);
@@ -99,19 +106,12 @@ public class IAEnemigo : MonoBehaviour {
         {
             BuscarJugador();
         }
-        
-        luminosidad = player.GetComponent<Jugador>().getLuminosidad() * 10;
-
-        if(luminosidad > 1)
-        {
-            luminosidad = 1;
-        }
     }
 
     void disparar()
     {
         //Debug.Log("i: " + new Vector3(r.Next(-punteria, punteria), r.Next(-punteria / 10, punteria / 10), 0));
-        if (t_diferencia > 0.1)
+        if (t_diferencia > 0.2)
         {
             GetComponent<AudioSource>().PlayOneShot(sonidoDisparar);
             t1 += Time.deltaTime;
@@ -131,12 +131,12 @@ public class IAEnemigo : MonoBehaviour {
                 else if (hit.collider.tag == "jugador")
                 {
                     Instantiate(hitEffectSangre, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
-                    hit.transform.SendMessage("AplicarDano", danoBala / hit.distance, SendMessageOptions.DontRequireReceiver);
+                    hit.transform.SendMessage("AplicarDano", 2 * danoBala / hit.distance, SendMessageOptions.DontRequireReceiver);
                 }
                 else if (hit.collider.tag == "tubo")
                 {
                     Instantiate(hitEffectElectricidad, hit.point, Quaternion.LookRotation(hit.normal));
-                    hit.transform.SendMessage("RomperLuz", danoBala / hit.distance, SendMessageOptions.DontRequireReceiver);
+                    hit.transform.SendMessage("RomperLuz", 2 * danoBala / hit.distance, SendMessageOptions.DontRequireReceiver);
                     indiceLucesRotas++;
                 }
             }
@@ -275,7 +275,7 @@ public class IAEnemigo : MonoBehaviour {
         {
             if (angulo < 70)
             {
-                Ray ray = new Ray(Bullet_Emitter1.transform.position, direccionJugador);
+                Ray ray = new Ray(Bullet_Emitter1.transform.position, direccionJugador + new Vector3(0, 3.62f, 0));
                 if (Physics.Raycast(ray, out hit, rangoVision * luminosidad))
                 {
                     //Debug.Log("Angulo: " + angulo+ " Tag: "+ hit.collider.tag+ " Detectado: " + jugadorDetectado + " Tiempo de olvido: " + tiempoDeOlvido);

@@ -107,7 +107,14 @@ public class Disparo : MonoBehaviour
                         else if (hit.collider.tag == "enemigo")
                         {
                             Instantiate(hitEffectSangre, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
-                            hit.transform.SendMessage("AplicarDano", danoBala / hit.distance, SendMessageOptions.DontRequireReceiver);
+                            hit.transform.SendMessage("AplicarDano", 2 * danoBala / hit.distance, SendMessageOptions.DontRequireReceiver);
+                            hit.transform.SendMessage("Tacto", SendMessageOptions.DontRequireReceiver);
+                        }
+                        // Si la bala llega a la cabeza del enemigo, mostramos la sangre y lo matamos directamente
+                        else if (hit.collider.tag == "cabeza_enemigo")
+                        {
+                            Instantiate(hitEffectSangre, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+                            hit.transform.SendMessage("AplicarDano", 99999, SendMessageOptions.DontRequireReceiver);
                             hit.transform.SendMessage("Tacto", SendMessageOptions.DontRequireReceiver);
                         }
                         // Si la bala llega al tubo de la luz, reproducimos las chispas eléctricas y rompemos el tubo
