@@ -11,7 +11,7 @@ public class Jugador : MonoBehaviour {
     float luminosidad;                                                      // Luz reflejada por el jugador
     float t1;                                                               // Tiempo de refresco
     int muertos, vivos;                                                     // Número de enemigos muertos y vivos
-
+    public AudioClip sonidoDolor;                                           // Sonido de dolor al recibir una bala
 
     void Start () {
         vida = maxVida;
@@ -81,6 +81,7 @@ public class Jugador : MonoBehaviour {
     // Método que recibe daño de una bala enemiga
     void AplicarDano(int dano)
     {
+        GetComponent<AudioSource>().PlayOneShot(sonidoDolor);
         vida -= dano;
     }
 
