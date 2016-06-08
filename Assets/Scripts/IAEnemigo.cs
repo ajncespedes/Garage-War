@@ -188,11 +188,11 @@ public class IAEnemigo : MonoBehaviour {
         jugadorDetectado = Vista();
         if (tiempoBuscando <= 0)
         {
-            tiempoBuscando = 10;
             Vector3 posicionAleatoria = new Vector3(r.Next(-30, 40), 0, r.Next(-45, 35));
             agent.SetDestination(posicionAleatoria);
             GetComponent<Animation>().Play(andar);
             agent.speed = velocidad/2;
+            tiempoBuscando = Vector3.Distance(posicionAleatoria, transform.position) / agent.speed;
         }
         tiempoBuscando -= Time.deltaTime;
     }

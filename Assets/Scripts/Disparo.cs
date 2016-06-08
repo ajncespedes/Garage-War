@@ -43,7 +43,11 @@ public class Disparo : MonoBehaviour
     float t1 = 0;
     float t2 = 0;
     float tDiferencia = 1;
-    
+    float tiempoRecarga = 3.3f;
+
+    bool recargando = false;
+
+
     void Start ()
     {
         nBalas = nBalasCargador;
@@ -75,7 +79,7 @@ public class Disparo : MonoBehaviour
         }
 
         // Si se ha producido la diferencia de tiempo suficiente como para volver a disparar
-        if (tDiferencia > 0.1)
+        if (tDiferencia > 0.1 && !recargando)
         {
             // Si tenemos balas en el cargador
             if (nBalas > 0)
@@ -161,12 +165,22 @@ public class Disparo : MonoBehaviour
         }
         t2 += Time.deltaTime;
         tDiferencia = t2 - t1;
+        if (recargando)
+        {
+            tiempoRecarga -= Time.deltaTime;
+        }
+        if(tiempoRecarga <= 0)
+        {
+            recargando = false;
+            tiempoRecarga = 3.3f;
+        }
     }
 
     void Recargar()
     {
         GetComponent<AudioSource>().PlayOneShot(sonidoRecargar1);
-        arma.GetComponent<Animation>().Play(NombreAnimacionRecarga); 
+        arma.GetComponent<Animation>().Play(NombreAnimacionRecarga);
+        recargando = true;
     }
     
     

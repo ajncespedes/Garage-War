@@ -74,6 +74,8 @@
     <Compile Include="Assets\Scripts\Enemigo.cs" />
     <Compile Include="Assets\Scripts\IAEnemigo.cs" />
     <Compile Include="Assets\Scripts\Jugador.cs" />
+    <Compile Include="Assets\Scripts\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\RotacionMenu.cs" />
     <Compile Include="Assets\Scripts\SpawnEnemy.cs" />
     <Compile Include="Assets\Scripts\luces.cs" />
   </ItemGroup>

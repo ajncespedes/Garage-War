@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Jugador : MonoBehaviour {
 
@@ -19,6 +20,7 @@ public class Jugador : MonoBehaviour {
         muertos = 0;
         vivos = 1;
         enemigosMuertos.text = "Enemigos muertos: " + muertos.ToString() + "/" + vivos.ToString();
+        Cursor.visible = false;
     }
 	
 	void Update () {
@@ -64,9 +66,14 @@ public class Jugador : MonoBehaviour {
 
         t1 += Time.deltaTime;
 
-        if(vida < 0)
+        if(vida <= 0)
         {
-            Application.Quit();
+            if(PlayerPrefs.GetInt("record", 0) < muertos)
+            {
+                PlayerPrefs.SetInt("record", muertos);
+            }
+            PlayerPrefs.SetInt("ultimo", muertos);
+            SceneManager.LoadScene("menu");
         }
 
     }
