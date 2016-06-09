@@ -9,7 +9,7 @@ Si el enemigo ve al jugador, se dirigirá hacia él mientras lo dispara. Si el e
 Si el enemigo recibe un balazo, mirará en dirección hacia el jugador.
 
 
-Controles:
+*Controles:*
 
 botón derecho del ratón: apuntar con el arma
 
