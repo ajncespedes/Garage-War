@@ -8,6 +8,9 @@ Si el enemigo ve al jugador, se dirigirá hacia él mientras lo dispara. Si el e
 
 Si el enemigo recibe un balazo, mirará en dirección hacia el jugador.
 
+**Ejecutable para descargar**
+
+https://www.dropbox.com/s/fv23800egbey4ej/Garage%20War.zip?dl=0
 
 **Controles:**
 
